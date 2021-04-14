@@ -11,34 +11,56 @@ import {
   SIGNUP_PATH,
 } from "constants/paths";
 import styles from "./HomePage.styles";
-import { HowToVote } from "@material-ui/icons";
+import { HowToVote, ThumbsUpDown } from "@material-ui/icons";
 import { Box, Button, ButtonBase } from "@material-ui/core";
 import Hero from "./Hero";
 import Logo from "components/Logo";
 
 const useStyles = makeStyles(styles);
 
+const SectionCard = ({ to, icon, label }) => {
+  const classes = useStyles();
+  const Icon = icon;
+  const inside = (
+    <Paper className={classes.paper}>
+      <div className={classes.circle}>
+        <Icon fontSize="large" className={classes.icon} />
+      </div>
+      <Typography variant="button" className={classes.sign}>
+        {label}
+      </Typography>
+    </Paper>
+  );
+  if (to) {
+    return (
+      <ButtonBase component={RouterLink} to={to}>
+        {inside}
+      </ButtonBase>
+    );
+  } else {
+    return <ButtonBase>{inside}</ButtonBase>;
+  }
+};
+
 const Home = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <ButtonBase
-        // variant="contained"
-        // color="secondary"
-        component={RouterLink}
-        to={LIST_PATH}
-      >
-        <Paper className={classes.paper}>
-          <div className={classes.circle}>
-            <HowToVote fontSize="large" className={classes.icon} />
-          </div>
-          <Typography variant="button" className={classes.sign}>
-            Poker
-          </Typography>
-        </Paper>
-      </ButtonBase>
-      <Box display="flex" alignItems="flex-start">
+      <Grid container spacing={5} justify="center">
+        <Grid item>
+          <SectionCard
+            to={LIST_PATH}
+            component={RouterLink}
+            icon={HowToVote}
+            label="Poker"
+          />
+        </Grid>
+        <Grid item>
+          <SectionCard icon={ThumbsUpDown} label="Retro" />
+        </Grid>
+      </Grid>
+      <Box display="flex" alignItems="flex-start" mt={-10}>
         <Hero />
         <Box ml={-20}>
           <Logo style={{ width: 400, marginTop: 100, transform: "" }} />

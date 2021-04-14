@@ -19,9 +19,10 @@ function AccountEditor() {
   const { data: profile } = useDatabaseObjectData(accountRef)
 
   async function updateAccount(newAccount) {
+    console.log(newAccount, accountRef, profile)
     try {
       await auth.updateProfile(newAccount)
-      await accountRef.set(newAccount, { merge: true })
+      await accountRef.set(newAccount)
       showSuccess('Profile updated successfully')
     } catch (err) {
       console.error('Error updating profile', err) // eslint-disable-line no-console

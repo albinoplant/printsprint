@@ -3,20 +3,30 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import { useParams } from 'react-router-dom'
 import { useDatabaseObjectData, useDatabase } from 'reactfire'
-import { PROJECTS_COLLECTION } from 'constants/firebasePaths'
+import { PROJECTS_COLLECTION, USERS_COLLECTION } from 'constants/firebasePaths'
 import Draft from './Draft'
-import { Box, Button, Card, Grid } from '@material-ui/core'
+import { Box, Button, Card, Grid, List, ListItem, ListItemAvatar, ListItemText, makeStyles } from '@material-ui/core'
 import moment from 'moment'
 import { useNotifications } from 'modules/notification'
 import Ready from './Ready'
+import { PanTool } from '@material-ui/icons'
+import styles from './ProjectData.styles'
+
+const useStyles = makeStyles(styles)
 
 function ProjectData() {
+  const classes = useStyles();
   const { projectId } = useParams()
   const database = useDatabase()
   const projectRef = database.ref(`${PROJECTS_COLLECTION}/${projectId}`)
   const { data: project } = useDatabaseObjectData(projectRef)
   const { showError, showSuccess } = useNotifications()
-  console.log(project)
+  const creatorRef = database.ref(`${USERS_COLLECTION}/${project.createdBy}`)
+  const {data: creator} = useDatabaseObjectData(creatorRef)
+
+  const voted =false;
+
+
   function toggleState(){
     const mod = project.status==="draft"?"open":"draft"
     return database
@@ -57,6 +67,12 @@ function ProjectData() {
       <Card>
         <CardContent>
           <Typography>Participants</Typography>
+          <List>
+            <ListItem>
+              <ListItemAvatar><PanTool className={voted?classes.voted:classes.notVoted}/></ListItemAvatar>
+              <ListItemText>👑 {creator.displayName}</ListItemText>
+            </ListItem>
+          </List>
         </CardContent>
       </Card>
     </Grid>
