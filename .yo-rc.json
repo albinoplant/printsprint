@@ -1,0 +1,22 @@
+{
+  "generator-react-firebase": {
+    "promptValues": {
+      "githubUser": "albinoplant",
+      "includeRedux": false,
+      "includeFirestore": false,
+      "otherFeatures": [
+        "Continuous Integration config",
+        "Firebase Cloud Messaging",
+        "Firebase Functions (with ESNext support)"
+      ],
+      "functionsTestTool": "mocha",
+      "typescriptCloudFunctions": false,
+      "firebaseKey": "AIzaSyB7dFf4zpoY_SlQngzLQ6ie7Sg6x0R0o8E",
+      "firebaseProjectId": "printsprint-app",
+      "messagingSenderId": "1072760820029",
+      "appId": "1:1072760820029:web:cd15ed11f9ebb9678cf554",
+      "firebasePublicVapidKey": "BCDmtaFx9Prs-wcnDc8bsOkCI1cBBAM-yRkOYB51g4FBrfK3EboUCjJQLb2vi8VyhbmzlVOaP3XUljKG_4xNyPA",
+      "ciProvider": "githubActions"
+    }
+  }
+}

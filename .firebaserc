@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "printsprint-app",
+    "master": "printsprint-app",
+    "prod": "printsprint-app"
+  }
+}
