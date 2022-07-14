@@ -30,7 +30,7 @@ jobs:
           echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Cache App Dependencies
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3.0.5
         with:
           path: ${{ steps.cache-settings.outputs.dir }}
           key: ${{ runner.os }}-app-${{ hashFiles('yarn.lock') }}
